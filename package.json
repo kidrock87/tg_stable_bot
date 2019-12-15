@@ -1,0 +1,31 @@
+{
+  "name": "hapi-rest-mongo",
+  "version": "1.0.0",
+  "description": "Simple REST project with hapijs and mongodb.",
+  "main": "server.js",
+  "private": true,
+  "author": "Patrick Meier",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "axios": "^0.17.1",
+    "boom": "^4.2.0",
+    "express": "^4.16.3",
+    "fs": "0.0.1-security",
+    "google-sign-in": "^3.0.3",
+    "hapi": "^16.1.0",
+    "inert": "^5.1.0",
+    "joi": "^10.2.2",
+    "md5": "^2.2.1",
+    "mongojs": "^2.4.0",
+    "node-uuid": "^1.4.7",
+    "nodemailer": "^4.4.1",
+    "path": "^0.12.7",
+    "request": "^2.87.0",
+    "vue-authenticate": "^1.3.4"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "IP=traders.amir.capital forever start server.js",
+    "local": "nodemon server.js"
+  }
+}
