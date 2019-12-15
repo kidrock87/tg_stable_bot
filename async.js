@@ -81,7 +81,7 @@ const order = async(type, quantity) =>{
       // Меняю статус позиции
       let pp = await axios.post(host+'/position', {status: 'open'})
     }else{
-      cpnsole.log('no buy')
+      console.log('no buy')
     }
   }
 }) ()
