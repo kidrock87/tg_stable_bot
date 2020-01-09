@@ -1,9 +1,14 @@
+
+const pr = require('./pc/price_channel');
+
+
 const axios = require('axios');
 const moment = require('moment');
 const Binance = require('binance-api-node').default
 const host = process.env.binance_host;
 console.log(host)
-
+console.log(process.env.binance_apiKey)
+console.log(process.env.binance_apiSecret)
 const binance = Binance({
   apiKey: process.env.binance_apiKey,
   apiSecret: process.env.binance_apiSecret,
@@ -43,11 +48,14 @@ const order = async(type, quantity) =>{
 
 
 ;(async () => {
-  const ohlcv = await binance.trades({ symbol: 'PAXUSDT', limit: 1 })
-  let curr_price = parseFloat(ohlcv[0].price);
+  const ohlcv = await binance.candles({ symbol: 'PAXUSDT', limit: 1, interval: '1m' })
+  let curr_price = await parseFloat(ohlcv[0].high);
+  console.log(ohlcv)
+  console.log(curr_price)
   //let pp1 = await axios.post(host+'/position', {quantity: 15})
 
   let pp2 = await axios.get(host+'/position')
+
   let lowest_price = parseFloat(pp2.data[0].lowest_price);
   let highest_price = parseFloat(pp2.data[0].highest_price);
   let quantity = parseFloat(pp2.data[0].quantity);
@@ -63,23 +71,25 @@ const order = async(type, quantity) =>{
   if(status){
     //  Продавай
     console.log('in sell')
-    if(curr_price > highest_price){
+    let reason = pr.line_calc(curr_price,'high');
+    if(reason === 'high_sell'){
       console.log('Продаю')
-      await order('sell', quantity)
+      //await order('sell', quantity)
       // Меняю статус позиции
-      let pp = await axios.post(host+'/position', {status: 'close'})
+      //let pp = await axios.post(host+'/position', {status: 'close'})
       //Лог продажи
     }else{
-      console.log('no buy')
+      console.log("Продолжаю ждать")
     }
   }else{
     ///Покупаю
     console.log('in buy')
-    if(curr_price < lowest_price){
+    let reason = pr.line_calc(curr_price,'low');
+    if(reason === 'low_buy'){
       console.log('Покупаю')
-      await order('buy', quantity)
+      //await order('buy', quantity)
       // Меняю статус позиции
-      let pp = await axios.post(host+'/position', {status: 'open'})
+      //let pp = await axios.post(host+'/position', {status: 'open'})
     }else{
       console.log('no buy')
     }
