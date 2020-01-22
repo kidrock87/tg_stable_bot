@@ -31,6 +31,10 @@ async function line_calc(curr_price, g_type) {
      y2 = high2
      y1 = high1
   }
+  //TEST
+  y1 = 1
+  y2 = 1.01
+
   let future_price = 2*y2 - y1;
   if(g_type == "low"){
     if(curr_price > future_price){
@@ -47,10 +51,10 @@ async function line_calc(curr_price, g_type) {
 
   }
 
-  console.log(y1)
-  console.log(y2)
-  console.log(future_price)
-  console.log(result)
+  console.log('y1: '+y1)
+  console.log('y2: '+y2)
+  console.log('future_price: '+future_price)
+  console.log('result: '+result)
   return result;
 }
 

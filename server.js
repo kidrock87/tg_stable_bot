@@ -11,7 +11,7 @@ server.connection({
     //host: 'localhost',
     host: SERVER_ADDR,
     routes: { cors: true },
-    port: 3000
+    port: 4000
 });
 
 //Connect to db
