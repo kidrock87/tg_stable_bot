@@ -10,7 +10,7 @@
     "axios": "^0.17.1",
     "binance-api-node": "^0.9.12",
     "boom": "^4.2.0",
-    "express": "^4.16.3",
+    "express": "^4.17.3",
     "fs": "0.0.1-security",
     "google-sign-in": "^3.0.3",
     "hapi": "^16.1.0",
